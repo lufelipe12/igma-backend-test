@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CustomerEntityDoc {
   @ApiProperty({
     type: Number,
-    example: 12,
+    example: 1,
   })
   id: number;
 
