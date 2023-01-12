@@ -49,8 +49,21 @@ export class CustomersService {
     }
   }
 
-  async findAll() {
+  async findAllPaginated(page: number, limit: number) {
     try {
+      const [customers, count] = await this.customersRepository.findAndCount({
+        skip: (page - 1) * limit,
+        take: limit,
+      });
+
+      const result = {
+        count,
+        page: page,
+        totalPages: Math.ceil(count / limit),
+        customers,
+      };
+
+      return result;
     } catch (error) {
       this.logger.error(error);
 

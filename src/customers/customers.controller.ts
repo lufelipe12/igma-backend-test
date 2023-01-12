@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 
 import { Customer } from '../database/entities/customer.entity';
 import { CustomersService } from './customers.service';
@@ -16,8 +25,11 @@ export class CustomersController {
   }
 
   @Get()
-  async findAll() {
-    return await this.customersService.findAll();
+  async findAllPaginated(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+  ) {
+    return await this.customersService.findAllPaginated(page, limit);
   }
 
   @Get(':cpf')
