@@ -44,7 +44,7 @@ $ yarn start:dev
 # production mode
 $ yarn start:prod
 
-# run with docker
+# run with docker (recommended)
 $ docker-compose up --build -d
 ```
 ## Deployment URL:
