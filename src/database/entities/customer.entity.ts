@@ -1,10 +1,14 @@
+import { UnprocessableEntityException } from '@nestjs/common';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   Index,
   CreateDateColumn,
+  BeforeInsert,
 } from 'typeorm';
+
+import { CpfHandler } from '../../utils/cpfHandler';
 
 @Entity('customers')
 export class Customer {
@@ -27,4 +31,15 @@ export class Customer {
 
   @CreateDateColumn({ select: false })
   createdAt: Date;
+
+  @BeforeInsert()
+  public cpfChecker(): void {
+    const cpfHandler = new CpfHandler();
+    const cpfFormatted = cpfHandler.cpfFormatter(this.cpf);
+    if (cpfFormatted.length !== 11) {
+      throw new UnprocessableEntityException('Invalid cpf.');
+    }
+
+    this.cpf = cpfFormatted;
+  }
 }
