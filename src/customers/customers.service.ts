@@ -101,7 +101,7 @@ export class CustomersService {
   async findOneWithCpf(cpf: string): Promise<Customer> {
     try {
       const customer = await this.customersRepository.findOne({
-        where: { cpf },
+        where: { cpf: this.cpfHandler.cpfFormatter(cpf) },
       });
 
       return customer;

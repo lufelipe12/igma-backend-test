@@ -36,8 +36,15 @@ export class Customer {
   public cpfChecker(): void {
     const cpfHandler = new CpfHandler();
     const cpfFormatted = cpfHandler.cpfFormatter(this.cpf);
-    if (cpfFormatted.length !== 11) {
-      throw new UnprocessableEntityException('Invalid cpf.');
+
+    if (!cpfFormatted || cpfFormatted.length !== 11) {
+      throw new UnprocessableEntityException('Invalid CPF.');
+    }
+
+    const isValidCpf = cpfHandler.isValidCpf(cpfFormatted);
+
+    if (!isValidCpf) {
+      throw new UnprocessableEntityException('Invalid CPF.');
     }
 
     this.cpf = cpfFormatted;
