@@ -8,8 +8,8 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Post()
-  create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customersService.create(createCustomerDto);
+  async create(@Body() createCustomerDto: CreateCustomerDto) {
+    return await this.customersService.create(createCustomerDto);
   }
 
   @Get()
@@ -17,8 +17,8 @@ export class CustomersController {
     return this.customersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.customersService.findOne(+id);
+  @Get(':cpf')
+  async findOne(@Param('cpf') cpf: string) {
+    return await this.customersService.findOne(cpf);
   }
 }
