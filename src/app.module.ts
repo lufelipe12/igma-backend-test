@@ -5,11 +5,13 @@ import { WinstonModule } from 'nest-winston';
 import { LoggerInterceptor } from './logger/logger.interceptor';
 import { winstonAsyncConfigOptions } from './logger/winston.config';
 import { DatabaseModule } from './database/database.module';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
     WinstonModule.forRootAsync(winstonAsyncConfigOptions),
     DatabaseModule,
+    RedisModule,
   ],
   providers: [
     {
