@@ -1,7 +1,7 @@
 
 ## Description
 
-This repository was made for igma backend test. Here's an API for customers registration with cpf verification.
+This repository was made for Igma's backend test. Here's an API for customers registration with cpf verification.
 
 ## Technologies
 
