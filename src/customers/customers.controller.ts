@@ -65,8 +65,8 @@ export class CustomersController {
   @Get(':cpf')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    summary: 'Get a customer by cpf numbers.',
-    description: 'Get a customer with id, name, cpf and birth by cpf numbers.',
+    summary: 'Get a customer by cpf.',
+    description: 'Get a customer with id, name, cpf and birth by cpf.',
   })
   @ApiResponse({
     status: HttpStatus.OK,
