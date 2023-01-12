@@ -13,6 +13,7 @@ import { Repository } from 'typeorm';
 
 import { Customer } from '../database/entities/customer.entity';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { CpfHandler } from '../utils/cpfHandler';
 
 @Injectable()
 export class CustomersService {
@@ -22,6 +23,8 @@ export class CustomersService {
 
     @InjectRepository(Customer)
     private readonly customersRepository: Repository<Customer>,
+
+    private readonly cpfHandler: CpfHandler,
   ) {}
 
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
@@ -98,7 +101,7 @@ export class CustomersService {
   async findOneWithCpf(cpf: string): Promise<Customer> {
     try {
       const customer = await this.customersRepository.findOne({
-        where: { cpf },
+        where: { cpf: this.cpfHandler.cpfFormatter(cpf) },
       });
 
       return customer;
