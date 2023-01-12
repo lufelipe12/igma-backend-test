@@ -23,14 +23,15 @@ export class CustomersService {
     @InjectRepository(Customer)
     private readonly customersRepository: Repository<Customer>,
   ) {}
-  async create(createCustomerDto: CreateCustomerDto) {
+
+  async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
     try {
       const { cpf } = createCustomerDto;
       const customerExists = await this.findOneWithCpf(cpf);
 
       if (customerExists) {
         throw new BadRequestException(
-          `Customer with this cpf:${cpf} already exists.`,
+          `Customer with this cpf: ${cpf} already exists.`,
         );
       }
 
@@ -48,16 +49,26 @@ export class CustomersService {
     }
   }
 
-  findAll() {
-    return `This action returns all customers`;
+  async findAll() {
+    try {
+    } catch (error) {
+      this.logger.error(error);
+
+      throw new HttpException(
+        error.message,
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  async findOne(cpf: string) {
+  async findOne(cpf: string): Promise<Customer> {
     try {
       const customer = await this.findOneWithCpf(cpf);
 
       if (!customer) {
-        throw new NotFoundException(`Customer with this cpf:${cpf} not found.`);
+        throw new NotFoundException(
+          `Customer with this cpf: ${cpf} not found.`,
+        );
       }
 
       return customer;
@@ -71,7 +82,7 @@ export class CustomersService {
     }
   }
 
-  async findOneWithCpf(cpf: string) {
+  async findOneWithCpf(cpf: string): Promise<Customer> {
     try {
       const customer = await this.customersRepository.findOne({
         where: { cpf },
