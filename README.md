@@ -49,7 +49,7 @@ $ docker-compose up --build -d
 ```
 ## Deployment URL:
 
-For the deployment, the [railway] -colocar link platform was used as an infrastructure provider.
+For the deployment, the [railway](https://railway.app/) platform was used as an infrastructure provider.
 
 ## Documentation
 
@@ -58,7 +58,7 @@ for trello and insomnia JSON if you want to test the routes. There are `baseUrl`
 
 - [Swagger] -colocar link
 - [Trello](https://trello.com/b/K6cF6sB1/igma-backend)
-- [Insomia] -colocar link
+- [Insomia](https://drive.google.com/file/d/1Mp7xEeApDiOF3y8IDa5u3ufVpO76Znmz/view?usp=sharing)
 
 ## Test
 
