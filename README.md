@@ -56,7 +56,7 @@ For the deployment, the [railway](https://railway.app/) platform was used as an 
 In this project I used trello to guide my tasks and insomnia to test the endpoints. Here are the links to the documentation,
 for trello and insomnia JSON if you want to test the routes. There are `baseUrl` options for local testing and `productionUrl` for production.
 
-- [Swagger] -colocar link
+- [Swagger](https://igma-backend-test-production.up.railway.app/api/docs)
 - [Trello](https://trello.com/b/K6cF6sB1/igma-backend)
 - [Insomia](https://drive.google.com/file/d/1Mp7xEeApDiOF3y8IDa5u3ufVpO76Znmz/view?usp=sharing)
 
