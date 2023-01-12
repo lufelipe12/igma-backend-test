@@ -15,7 +15,7 @@ This repository was made for igma backend test. Here's an API for customers regi
 
 ## Project Structure
 
-Projects DER:
+Projects Entity:
 
 ![igma-der drawio](https://user-images.githubusercontent.com/90461911/212172463-85c987c7-4990-4d7f-8ae9-a116a52b0678.png)
 
