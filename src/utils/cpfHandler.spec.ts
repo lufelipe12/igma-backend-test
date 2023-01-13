@@ -25,7 +25,7 @@ describe('CpfHandler', () => {
       expect(result).toBeUndefined();
     });
 
-    it('Should return a length lesse than 11 for cpf mixed with letters', () => {
+    it('Should return a length lesser than 11 for cpf mixed with letters', () => {
       const cpf = '11a.b3b.cda-a1';
 
       const result = cpfHandler.cpfFormatter(cpf);
