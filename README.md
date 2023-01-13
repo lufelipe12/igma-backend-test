@@ -11,6 +11,7 @@ This repository was made for Igma's backend test. Here's an API for customers re
 - Swagger
 - Docker
 - Postgresql 
+- Redis
 - Railway for deploy
 
 ## Project Structure
