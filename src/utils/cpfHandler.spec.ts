@@ -1,4 +1,3 @@
-import { Test } from '@nestjs/testing';
 import { CpfHandler } from './cpfHandler';
 
 describe('CpfHandler', () => {

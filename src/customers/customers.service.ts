@@ -65,7 +65,6 @@ export class CustomersService {
         return customersCached;
       }
 
-      await this.cacheManager.del(cacheKey);
       const [customers, count] = await this.customersRepository.findAndCount({
         skip: (page - 1) * limit,
         take: limit,
