@@ -9,7 +9,6 @@ import {
   ParseIntPipe,
   HttpCode,
   HttpStatus,
-  CacheTTL,
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -56,7 +55,6 @@ export class CustomersController {
     status: HttpStatus.OK,
     type: GetAllCustomersPaginatedDoc,
   })
-  @CacheTTL(20)
   async findAllPaginated(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,

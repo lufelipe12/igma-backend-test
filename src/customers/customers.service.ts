@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  CACHE_MANAGER,
   HttpException,
   HttpStatus,
   Inject,
@@ -10,6 +11,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Repository } from 'typeorm';
+import { Cache } from 'cache-manager';
 
 import { Customer } from '../database/entities/customer.entity';
 import { CreateCustomerDto } from './dto/create-customer.dto';
@@ -20,6 +22,8 @@ export class CustomersService {
   constructor(
     @Inject(WINSTON_MODULE_NEST_PROVIDER)
     private readonly logger: LoggerService,
+    @Inject(CACHE_MANAGER)
+    private readonly cacheManager: Cache,
 
     @InjectRepository(Customer)
     private readonly customersRepository: Repository<Customer>,
@@ -54,6 +58,14 @@ export class CustomersService {
 
   async findAllPaginated(page: number, limit: number) {
     try {
+      const cacheKey = `igma_api_customers:${page}-${limit}`;
+      const customersCached = await this.cacheManager.get(cacheKey);
+
+      if (customersCached) {
+        return customersCached;
+      }
+
+      await this.cacheManager.del(cacheKey);
       const [customers, count] = await this.customersRepository.findAndCount({
         skip: (page - 1) * limit,
         take: limit,
@@ -65,6 +77,8 @@ export class CustomersService {
         totalPages: Math.ceil(count / limit),
         customers,
       };
+
+      await this.cacheManager.set(cacheKey, result, { ttl: 5 });
 
       return result;
     } catch (error) {
